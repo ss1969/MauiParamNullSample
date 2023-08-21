@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MauiApp1"
+             x:Class="MauiApp1.MainPage"
+             x:DataType="local:MainPageVM">
+
+    <ScrollView>
+        <VerticalStackLayout VerticalOptions="Center" Spacing="5">
+            <Label HorizontalOptions="Center" Text="Press the button to check if Parameter is NULL, in Debug it's not NULL, but in Release it's NULL." />
+            <Label HorizontalOptions="Center" Text="My Goal is to pass CollectionView selected item handle to MainPageVM.CVItemButton() function." />
+            <Label HorizontalOptions="Center" Text="MainPageVM.CanCVItemButton() function should also receivce an valid handle." />
+
+            <CollectionView HorizontalOptions="Center"
+                            ItemsLayout="VerticalGrid"
+                            ItemsSource="{Binding CVItems}"
+                            SelectionMode="None">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <local:CollectionViewItem HorizontalOptions="Center"
+                                                  Button1Command="{Binding CVItemButtonCommand, Source={RelativeSource AncestorType={x:Type local:MainPageVM}}}"
+                                                  SelfHandle="{Binding}"
+                                                  BindingContext="{Binding}" />
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Label HorizontalOptions="Center"
+                   FontSize="16"
+                   Text="{Binding Result}" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
